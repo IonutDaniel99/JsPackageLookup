@@ -6,6 +6,7 @@ function App() {
   const [packageJsonObject, setPackageJsonObject] = createSignal({ dependencies: null, devDependencies: null, error: null });
 
   function handleJsonFromInputZone(childData) {
+    if (!childData) setPackageJsonObject({});
     setPackageJsonObject(childData);
   }
 

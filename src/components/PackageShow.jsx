@@ -2,6 +2,9 @@ import semver from "semver";
 import { For, createEffect, createSignal, onMount } from "solid-js";
 import Loading from "./Loading";
 
+import { ImArrowUpRight2, ImArrowDownRight2 } from "solid-icons/im";
+import { FaSolidEquals } from "solid-icons/fa";
+
 export default function PackageShow({ dependencies, devDependencies }) {
   const dep = Object.entries(dependencies);
   const devDep = Object.entries(devDependencies);
@@ -22,9 +25,9 @@ export default function PackageShow({ dependencies, devDependencies }) {
   const checkVersionDiff = (actual, latest) => {
     const cleanVersion1 = semver.clean(actual.replace("^", ""));
     const cleanVersion2 = semver.clean(latest.replace("^", ""));
-    if (cleanVersion1 === cleanVersion2) return "equal";
+    if (cleanVersion1 === cleanVersion2) return "Equal";
     const x = semver.gte(cleanVersion1, cleanVersion2);
-    return x === true ? "higher" : "lower";
+    return x !== true ? "Higher" : "Lower";
   };
 
   onMount(async () => {
@@ -44,6 +47,17 @@ export default function PackageShow({ dependencies, devDependencies }) {
       }, {})
     );
   });
+
+  function returnDiffIcons(diffValue) {
+    switch (diffValue.toLowerCase()) {
+      case "higher":
+        return <ImArrowUpRight2 color="lime" class="h-5 w-5" />;
+      case "equal":
+        return <FaSolidEquals color="yellow" class="h-5 w-5" />;
+      case "lower":
+        return <ImArrowDownRight2 color="red" class="h-5 w-5" />;
+    }
+  }
 
   return (
     <div class="h-full flex flex-col gap-10">
@@ -68,16 +82,22 @@ export default function PackageShow({ dependencies, devDependencies }) {
                 const library_actual = dep[i()][1];
                 const library_current = data["dist-tags"].latest;
                 const library_author = data.author?.name ? data.author.name : "-";
-                const library_page = data.homepage ? data.homepage : "-";
+                const library_page = data.homepage ? data.homepage : null;
                 return (
                   <tr class={`w-full hover:bg-gray-700 ${i() % 2 === 0 ? "bg-gray-800" : "bg-gray-900"}`}>
-                    <td class="px-6 py-2 text-xs  font-medium whitespace-nowrap text-white">{library_name}</td>
-                    <td class="px-6 py-2 text-xs  text-center text-stone-200">{library_diff} </td>
-                    <td class="px-6 py-2 text-xs  text-center text-stone-200">{library_actual}</td>
-                    <td class="px-6 py-2 text-xs  text-center text-stone-200">{library_current}</td>
-                    <td class="px-6 py-2 text-xs  text-center text-stone-200">{library_author}</td>
-                    <td class="px-6 py-2 text-xs  text-center text-stone-200">
-                      <a href={library_page}> R</a>
+                    <td class="px-6 py-2 text-xs font-medium whitespace-nowrap text-white">{library_name}</td>
+                    <td class="px-6 py-2 text-xs text-center text-stone-200 gap-2">
+                      <span class="flex items-center justify-center gap-3">
+                        {returnDiffIcons(library_diff)} {library_diff}
+                      </span>
+                    </td>
+                    <td class="px-6 py-2 text-xs text-center text-stone-200">{library_actual.replace(/[^\d.]/g, "")}</td>
+                    <td class="px-6 py-2 text-xs text-center text-stone-200">{library_current.replace(/[^\d.]/g, "")}</td>
+                    <td class="px-6 py-2 text-xs text-center text-stone-200">{library_author}</td>
+                    <td class="px-6 py-2 text-xs text-center text-stone-200">
+                      <Show when={library_page !== null}>
+                        <a href={library_page}>R</a>
+                      </Show>
                     </td>
                   </tr>
                 );
@@ -99,7 +119,7 @@ export default function PackageShow({ dependencies, devDependencies }) {
               <th class="px-6 py-2 text-center text-xs w-1/12">Webpage</th>
             </tr>
           </thead>
-          <tbody class=" border-b bg-gray-800 border-gray-700 ">
+          <tbody class="border-b bg-gray-800 border-gray-700 ">
             <For each={Object.entries(devDepPromis())} fallback={<Loading />}>
               {([item, data], i) => {
                 const library_name = item;
@@ -107,16 +127,22 @@ export default function PackageShow({ dependencies, devDependencies }) {
                 const library_actual = devDep[i()][1];
                 const library_current = data["dist-tags"].latest;
                 const library_author = data.author?.name ? data.author.name : "-";
-                const library_page = data.homepage ? data.homepage : "-";
+                const library_page = data.homepage ? data.homepage : null;
                 return (
                   <tr class={`w-full hover:bg-gray-700  ${i() % 2 === 0 ? "bg-gray-800" : "bg-gray-900"}`}>
-                    <th class="px-6 py-2 font-medium whitespace-nowrap text-white">{library_name}</th>
-                    <td class="px-6 py-2 text-center text-stone-200">{library_diff} </td>
-                    <td class="px-6 py-2 text-center text-stone-200">{library_actual}</td>
-                    <td class="px-6 py-2 text-center text-stone-200">{library_current}</td>
-                    <td class="px-6 py-2 text-center text-stone-200">{library_author}</td>
-                    <td class="px-6 py-2 text-center text-stone-200">
-                      <a href={library_page}> R</a>
+                    <th class="px-6 py-2 text-xs   font-medium whitespace-nowrap text-white">{library_name}</th>
+                    <td class="px-6 py-2 text-xs  text-center text-stone-200">
+                      <span class="flex items-center justify-center gap-3">
+                        {returnDiffIcons(library_diff)} {library_diff}
+                      </span>
+                    </td>
+                    <td class="px-6 py-2 text-xs  text-center text-stone-200">{library_actual.replace(/[^\d.]/g, "")}</td>
+                    <td class="px-6 py-2 text-xs  text-center text-stone-200">{library_current.replace(/[^\d.]/g, "")}</td>
+                    <td class="px-6 py-2 text-xs  text-center text-stone-200">{library_author}</td>
+                    <td class="px-6 py-2 text-xs  text-center text-stone-200">
+                      <Show when={library_page !== null}>
+                        <a href={library_page}>R</a>
+                      </Show>
                     </td>
                   </tr>
                 );
