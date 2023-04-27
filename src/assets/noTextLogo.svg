@@ -1,0 +1,16 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80">
+	<title>noTextLogo-svg</title>
+	<defs>
+		<image  width="80" height="80" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQAQMAAAC032DuAAAAAXNSR0IB2cksfwAAAANQTFRF////p8QbyAAAABFJREFUeJxjYBgFo2AU0AsAAANwAAE63OMCAAAAAElFTkSuQmCC"/>
+	</defs>
+	<style>
+		.s0 { fill: #c67d4e } 
+	</style>
+	<use id="Layer 1" href="#img1" x="0" y="0"/>
+	<g id="Layer">
+		<g id="svg_3">
+			<path id="svg_4" fill-rule="evenodd" class="s0" d="m0 0h80v80h-80zm5 75h70v-70h-70z"/>
+			<path id="svg_5" class="s0" d="m16.1 42.1h22.4l-11.2-19.3-11.2 19.3zm25.4-8.7h22.4l-11.2-19.4-11.2 19.4zm-25.4 32.7h22.4l-11.2-19.4-11.2 19.4zm25.4-8.8h22.4l-11.2-19.3-11.2 19.3z"/>
+		</g>
+	</g>
+</svg>

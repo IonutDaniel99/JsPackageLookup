@@ -1,5 +1,8 @@
 {
     "1.0.0" : [
         "Initial website launch."
+    ],
+    "1.0.1" : [
+        "Change webpage head title.", "Change favicon.", "Add used library name in about section."
     ]
 }

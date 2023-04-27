@@ -119,7 +119,9 @@ function App() {
                   </div>
                   <div>
                     <div class="w-full flex items-center justify-center mb-4">
-                      <p>Created by <a href="https://github.com/IonutDaniel99" class="text-blue-500 font-semibold underline underline-offset-4 outline-offset-0 outline-0 focus-visible:outline-offset-0" target="_blank">Ionut Daniel (GitHub)</a></p>
+                      <p class="text-sm">Created by <a href="https://github.com/IonutDaniel99" class="text-blue-500 font-semibold underline underline-offset-4 outline-offset-0 outline-0 focus-visible:outline-offset-0" target="_blank">Ionut Daniel (GitHub)</a>
+                        &nbsp;using <a href="https://github.com/IonutDaniel99" class="text-blue-500 font-semibold underline underline-offset-4 outline-offset-0 outline-0 focus-visible:outline-offset-0" target="_blank">SolidJs</a>.
+                      </p>
                     </div>
                     <div class="mb-2 flex gap-2 float-right">
                       <button

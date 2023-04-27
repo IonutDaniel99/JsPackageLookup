@@ -105,7 +105,7 @@ export default function InputZone(props) {
                 Paste content of <b>Package.json</b> here:
             </label>
             <textarea
-                class="block p-2.5 w-full text-sm max-h-[500px] h-[500px] rounded-lg border bg-gray-700 border-gray-600 placeholder-gray-400 text-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                class="block p-2.5 w-full text-xs max-h-[500px] h-[500px] rounded-lg border bg-gray-700 border-gray-600 placeholder-gray-400 text-gray-300 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Write your thoughts here..."
                 onChange={handleInputChange}
                 value={inputValue()}
