@@ -20,6 +20,7 @@
     "@srsholmes/solid-code-input": "^0.0.18",
     "highlight.js": "^11.7.0",
     "semver": "^7.5.0",
+    "solid-headless": "^0.13.1",
     "solid-icons": "^1.0.4",
     "solid-js": "^1.6.10",
     "tailwind": "^4.0.0"
