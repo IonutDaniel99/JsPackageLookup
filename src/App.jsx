@@ -3,6 +3,8 @@ import InputZone from "./components/InputZone";
 import PackageShow from "./components/PackageShow";
 import Logo from './assets/Logo.svg'
 
+import { inject } from '@vercel/analytics';
+
 import {
   Dialog,
   DialogPanel,
@@ -15,6 +17,10 @@ import {
 import versions from "./version.json"
 
 function App() {
+
+  inject();
+
+
   const [packageJsonObject, setPackageJsonObject] = createSignal({ dependencies: null, devDependencies: null, error: null });
   function handleJsonFromInputZone(childData) {
     setPackageJsonObject(childData);
@@ -58,7 +64,6 @@ function App() {
 
         </div>
       </div>
-
       <Transition appear show={isOpen()}>
         <Dialog
           isOpen

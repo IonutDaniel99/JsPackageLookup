@@ -4,5 +4,8 @@
     ],
     "1.0.1" : [
         "Change webpage head title.", "Change favicon.", "Add used library name in about section."
+    ],
+    "1.0.2" : [
+        "Add Vercel Analytics","Change Json input area text size."
     ]
 }

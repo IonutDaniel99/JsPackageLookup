@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@srsholmes/solid-code-input": "^0.0.18",
+    "@vercel/analytics": "^1.0.0",
     "highlight.js": "^11.7.0",
     "semver": "^7.5.0",
     "solid-headless": "^0.13.1",
