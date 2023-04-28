@@ -106,7 +106,7 @@ export default function InputZone(props) {
             </label>
             <div class="relative">
                 <textarea
-                    class="block p-2.5 w-full text-xs h-80 xl:max-h-[500px] xl:h-[500px] rounded-lg border bg-gray-700 border-gray-600 placeholder-gray-400 text-gray-300 resize-none"
+                    class="block p-2.5 w-full text-xs h-80 xl:max-h-[500px] xl:h-[500px] rounded-lg border bg-gray-700 border-gray-600 placeholder-gray-400 text-gray-300 resize-none scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-900"
                     placeholder="Write your thoughts here..."
                     onChange={handleInputChange}
                     value={inputValue()}

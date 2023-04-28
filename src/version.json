@@ -12,6 +12,9 @@
         "Fix some Json textarea errors.", "Improve responsiveness.", "Add loading bar for dependencies tables."
     ],
     "1.0.4":[
-        "Improve scrollbar style.","Versioning list improvements."
+        "Scrollbar style improvement.","Versioning list improvements."
+    ],
+    "1.0.5":[
+        "Implement error handling for missing libraries.", "Improve scrollbar for JSON input area."
     ]
 }

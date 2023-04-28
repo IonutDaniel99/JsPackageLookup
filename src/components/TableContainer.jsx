@@ -46,33 +46,53 @@ export default function TableContianer({ title, dependencies }) {
                     <For each={Object.entries(depPromis())}>
                         {([item, data], i) => {
                             const library_name = item;
-                            const library_diff = checkVersionDiff(dependencies[i()][1], data["dist-tags"].latest);
-                            const library_actual = dependencies[i()][1];
-                            const library_current = data["dist-tags"].latest;
-                            const library_author = data.author?.name ? data.author.name : "-";
-                            const library_page = data.homepage ? data.homepage : null;
-                            return (
-                                <tr class={`w-full hover:bg-gray-700 ${i() % 2 === 0 ? "bg-gray-800" : "bg-gray-900"}`}>
-                                    <td class="px-6 py-2 text-xs font-medium whitespace-nowrap text-white capitalize ">{library_name}</td>
-                                    <td class="px-6 py-2 text-xs text-center text-stone-200 gap-2">
-                                        <span class="flex items-center justify-center gap-3">
-                                            {returnDiffIcons(library_diff)} {library_diff}
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-2 text-xs text-center text-stone-200">{library_actual.replace(/[^\d.]/g, "")}</td>
-                                    <td class="px-6 py-2 text-xs text-center text-stone-200">{library_current.replace(/[^\d.]/g, "")}</td>
-                                    <td class="px-6 py-2 text-xs text-center text-stone-200">{library_author}</td>
-                                    <td class="px-6 py-2 text-xs text-center text-stone-200">
-                                        <Show when={library_page !== null}>
-                                            <a href={library_page} target="_blank">
+                            if (data) {
+                                const library_diff = checkVersionDiff(dependencies[i()][1], data["dist-tags"].latest);
+                                const library_actual = dependencies[i()][1];
+                                const library_current = data["dist-tags"].latest;
+                                const library_author = data.author?.name ? data.author.name : "-";
+                                const library_page = data.homepage ? data.homepage : null;
+                                return (
+                                    <tr class={`w-full hover:bg-gray-700 ${i() % 2 === 0 ? "bg-gray-800" : "bg-gray-900"}`}>
+                                        <td class="px-6 py-2 text-xs font-medium whitespace-nowrap text-white capitalize ">{library_name}</td>
+                                        <td class="px-6 py-2 text-xs text-center text-stone-200 gap-2">
+                                            <span class="flex items-center justify-center gap-3">
+                                                {returnDiffIcons(library_diff)} {library_diff}
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-2 text-xs text-center text-stone-200">{library_actual.replace(/[^\d.]/g, "")}</td>
+                                        <td class="px-6 py-2 text-xs text-center text-stone-200">{library_current.replace(/[^\d.]/g, "")}</td>
+                                        <td class="px-6 py-2 text-xs text-center text-stone-200">{library_author}</td>
+                                        <td class="px-6 py-2 text-xs text-center text-stone-200">
+                                            <Show when={library_page !== null}>
+                                                <a href={library_page} target="_blank">
+                                                    <span class="flex items-center justify-center gap-3">
+                                                        <OcLinkexternal2 class="h-4 w-4" />
+                                                    </span>
+                                                </a>
+                                            </Show>
+                                        </td>
+                                    </tr>
+                                );
+                            } else {
+                                return (
+                                    <tr class={`w-full hover:bg-gray-700 ${i() % 2 === 0 ? "bg-gray-800" : "bg-gray-900"}`}>
+                                        <td class="px-6 py-2 text-xs font-medium whitespace-nowrap text-white capitalize ">{library_name}</td>
+                                        <td class="px-6 py-2 text-xs text-center text-stone-200 gap-2" colSpan={4}>
+                                            <span class="flex items-center justify-center">
+                                                Library not found on&nbsp;<a href="www.npmjs.com" class="text-blue-400">NpmJS.com</a>
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-2 text-xs text-center text-stone-200">
+                                            <a href={`https://www.npmjs.com/search?q=${library_name}`} target="_blank">
                                                 <span class="flex items-center justify-center gap-3">
                                                     <OcLinkexternal2 class="h-4 w-4" />
                                                 </span>
                                             </a>
-                                        </Show>
-                                    </td>
-                                </tr>
-                            );
+                                        </td>
+                                    </tr>
+                                )
+                            }
                         }}
                     </For>
                 </Show>
