@@ -1,24 +1,34 @@
 import { OcLinkexternal2 } from "solid-icons/oc";
-import Loading from "./Loading";
-import { checkForJsonTitle, checkVersionDiff, getLibraryDetails, returnDiffIcons } from "../helpers/helpers";
+import { checkForJsonTitle, checkVersionDiff, getLibraryDetails, returnDiffIcons, returnPercentageForSlider } from "../helpers/helpers";
 import { Show, createSignal, onMount } from "solid-js";
 import NoDependencies from "./NoDependencies";
 
 export default function TableContianer({ title, dependencies }) {
 
     const [depPromis, setDepPromis] = createSignal({});
+    const [numResolved, setNumResolved] = createSignal(0);
+    const [showProgress, setShowProgress] = createSignal(true);
+
 
     onMount(async () => {
-        const depList = await Promise.all(dependencies.map(([name]) => getLibraryDetails(name)));
+        const depList = await Promise.all(dependencies.map(([name]) => {
+
+            return getLibraryDetails(name).then((data) => {
+                setNumResolved(numResolved() + 1)
+                return data
+            });
+        }));
+
         setDepPromis(
             depList.reduce((acc, val, index) => {
                 acc[dependencies[index][0]] = val;
                 return acc;
             }, {})
         );
+        setShowProgress(false)
     });
 
-    return <div class="overflow-y-auto overflow-x-auto lg:overflow-x-hidden max-h-80  border-2 rounded-md border-slate-700">
+    return <div class="overflow-y-auto overflow-x-auto lg:overflow-x-hidden border-2 rounded-md border-slate-700" style={"height: 32vh"}>
         <table class="text-sm text-left text-gray-500 w-full relative">
             <caption class="caption-top px-6 py-2 text-base font-bold  bg-gray-700 text-gray-200 border-b-2 border-gray-600">{title}</caption>
             <thead class=" bg-gray-700 text-gray-300">
@@ -33,7 +43,7 @@ export default function TableContianer({ title, dependencies }) {
             </thead>
             <tbody class=" border-b bg-gray-800 border-gray-700" >
                 <Show when={dependencies.length > 0} fallback={<NoDependencies titleCheck={checkForJsonTitle(title)} />}>
-                    <For each={Object.entries(depPromis())} fallback={<Loading />}>
+                    <For each={Object.entries(depPromis())}>
                         {([item, data], i) => {
                             const library_name = item;
                             const library_diff = checkVersionDiff(dependencies[i()][1], data["dist-tags"].latest);
@@ -66,7 +76,19 @@ export default function TableContianer({ title, dependencies }) {
                         }}
                     </For>
                 </Show>
-
+                <Show when={showProgress()}>
+                    <tr class="w-full">
+                        <td class="py-2 text-center" colSpan={6}>
+                            <div class="flex justify-between mb-1 w-80 text-center m-auto px-2">
+                                <span class="text-sm font-medium text-white">Loading {returnPercentageForSlider(dependencies, numResolved())}%</span>
+                                <span class="text-sm font-medium text-white">{numResolved()} out of {dependencies.length}</span>
+                            </div>
+                            <div class="rounded-full h-2.5 bg-gray-700  text-center m-auto w-80">
+                                <div class="bg-red-600 h-2.5 rounded-full" style={`width: ${returnPercentageForSlider(dependencies, numResolved())}%`}></div>
+                            </div>
+                        </td>
+                    </tr>
+                </Show>
             </tbody>
         </table>
     </div>

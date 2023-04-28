@@ -15,8 +15,8 @@ export function returnDiffIcons(diffValue) {
 
 
 export const checkVersionDiff = (actual, latest) => {
-    const cleanVersion1 = semver.clean(actual.replace("^", ""));
-    const cleanVersion2 = semver.clean(latest.replace("^", ""));
+    const cleanVersion1 = semver.clean(actual.replace(/[~^]/g, ''));
+    const cleanVersion2 = semver.clean(latest.replace(/[~^]/g, ''));
     if (cleanVersion1 === cleanVersion2) return "Equal";
     const x = semver.gte(cleanVersion1, cleanVersion2);
     return x == true ? "Higher" : "Lower";
@@ -34,4 +34,9 @@ export const getLibraryDetails = async (libraryName) => {
 
 export const checkForJsonTitle = (title) => {
     return title === "Dependencies" ? "dependencies" : "devDependencies"
+}
+
+export const returnPercentageForSlider = (arrayLength, currentNumber) => {
+    const x = (currentNumber / arrayLength.length) * 100
+    return x.toFixed(0);
 }

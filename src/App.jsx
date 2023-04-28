@@ -40,7 +40,7 @@ function App() {
   return (
     <>
       <div class="h-screen w-screen flex justify-center bg-gray-900">
-        <div class="container mx-auto my-4 pl-4 px-14 w-4/6 bg-gray-800 rounded-xl">
+        <div class="m-4 w-full px-10 bg-gray-800 rounded-xl 2xl:mx-auto 2xl:container 2xl:w-4/6  ">
           <nav class="py-4">
             <ul class="flex items-center justify-between gap-4 text-white">
               <img class="h-12" src={Logo} />

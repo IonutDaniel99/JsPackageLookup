@@ -101,43 +101,46 @@ export default function InputZone(props) {
 
     return (
         <>
-            <label for="message" class="block mb-2 text-sm font-medium  text-white">
+            <label for="message" class="block mb-2 text-xs xl:text-sm font-medium  text-white">
                 Paste content of <b>Package.json</b> here:
             </label>
-            <textarea
-                class="block p-2.5 w-full text-xs max-h-[500px] h-[500px] rounded-lg border bg-gray-700 border-gray-600 placeholder-gray-400 text-gray-300 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Write your thoughts here..."
-                onChange={handleInputChange}
-                value={inputValue()}
-            />
+            <div class="relative">
+                <textarea
+                    class="block p-2.5 w-full text-xs h-80 xl:max-h-[500px] xl:h-[500px] rounded-lg border bg-gray-700 border-gray-600 placeholder-gray-400 text-gray-300 resize-none"
+                    placeholder="Write your thoughts here..."
+                    onChange={handleInputChange}
+                    value={inputValue()}
+                />
+                <Show when={inputError()}>
+                    <div class="absolute bottom-0 border-t bg-gray-700 border-red-500 flex flex-col items-center py-2 px-4 w-full rounded-b-lg">
+                        <div class=" text-lg text-red-600 text-center font-bold  animate-pulse duration-500">Error</div>
+                        <div class=" text-white text-center text-sm  animate-pulse duration-500">{inputError()}</div>
+                    </div>
+                </Show>
+            </div>
 
-            <div class="flex justify-between py-2 w-full gap-2">
+            <div class="flex justify-between flex-col xl:flex-row py-2 w-full gap-2">
                 <div
-                    onClick={() => sendJsonToP()}
-                    class="cursor-pointer border focus:ring-4 focus:outline-none w-1/3 font-medium rounded-lg text-sm px-5 py-2 text-center  border-blue-500 text-blue-400 hover:text-white hover:bg-blue-500 focus:ring-blue-800"
+                    onClick={() => clearTextArea()}
+                    class="cursor-pointer border  focus:ring-4 focus:outline-none w-full xl:w-1/3 font-medium rounded-lg text-sm px-5 py-2 text-center border-red-500 text-red-400 hover:text-white hover:bg-red-600 focus:ring-red-900"
                 >
-                    Lookup
+                    Clear
                 </div>
                 <div
                     onClick={() => setJsonExample()}
-                    class="cursor-pointer  border focus:ring-4 focus:outline-none w-1/3 font-medium rounded-lg text-sm px-5 py-2 text-center  border-green-500 text-green-400 hover:text-white hover:bg-green-500 focus:ring-green-800"
+                    class="cursor-pointer  border focus:ring-4 focus:outline-none w-full xl:w-1/3 font-medium rounded-lg text-sm px-5 py-2 text-center  border-green-500 text-green-400 hover:text-white hover:bg-green-500 focus:ring-green-800"
                 >
                     Example
                 </div>
                 <div
-                    onClick={() => clearTextArea()}
-                    class="cursor-pointer border  focus:ring-4 focus:outline-none w-1/3 font-medium rounded-lg text-sm px-5 py-2 text-center border-red-500 text-red-400 hover:text-white hover:bg-red-600 focus:ring-red-900"
+                    onClick={() => sendJsonToP()}
+                    class="cursor-pointer border focus:ring-4 focus:outline-none w-full xl:w-1/3 font-medium rounded-lg text-sm px-5 py-2 text-center  border-blue-500 text-blue-400 hover:text-white hover:bg-blue-500 focus:ring-blue-800"
                 >
-                    Clear
+                    Lookup
                 </div>
             </div>
 
-            <Show when={inputError()}>
-                <div class="border-2 rounded-md border-red-500 flex flex-col items-center py-2 px-4 animate-pulse duration-500">
-                    <div class=" text-lg text-red-600 text-center font-medium">Error</div>
-                    <div class=" text-white text-center text-sm">{inputError()}</div>
-                </div>
-            </Show>
+
         </>
     );
 }
