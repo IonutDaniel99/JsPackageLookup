@@ -28,7 +28,7 @@ export default function TableContianer({ title, dependencies }) {
         setShowProgress(false)
     });
 
-    return <div class="overflow-y-auto overflow-x-auto lg:overflow-x-hidden border-2 rounded-md border-slate-700" style={"height: 32vh"}>
+    return <div class="overflow-y-auto overflow-x-auto lg:overflow-x-hidden border-2 rounded-md border-slate-700 scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-900" style={"height: 32vh"}>
         <table class="text-sm text-left text-gray-500 w-full relative">
             <caption class="caption-top px-6 py-2 text-base font-bold  bg-gray-700 text-gray-200 border-b-2 border-gray-600">{title}</caption>
             <thead class=" bg-gray-700 text-gray-300">

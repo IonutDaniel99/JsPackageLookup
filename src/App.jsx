@@ -104,9 +104,8 @@ function App() {
                 >
                   About
                 </DialogTitle>
-                <div class="p-4 flex flex-col justify-between h-full">
-
-                  <div class="mt-2">
+                <div class="p-2 flex flex-col justify-between h-full">
+                  <div class="mt-2 h-full mb-8 overflow-y-auto border border-gray-400 p-2 rounded-md scrollbar-thin scrollbar-thumb-neutral-300 scrollbar-track-slate-200">
                     <For each={Object.entries(versions)}>
                       {([item, data], i) => {
                         return <>
