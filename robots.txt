@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /
+
+Sitemap: http://js-package-lookup.vercel.app/

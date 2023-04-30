@@ -16,5 +16,12 @@
     ],
     "1.0.5":[
         "Implement error handling for missing libraries.", "Improve scrollbar for JSON input area."
+    ],
+    "1.0.6":[
+        "Improve website responsiveness.",
+        "Add error handling for screen width lower than 1024px.",
+        "Improve webpage SEO.",
+        "Add robots.txt file.",
+        "Change equal icon color to a brighter yellow.".
     ]
 }
