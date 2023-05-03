@@ -23,5 +23,8 @@
         "Improve webpage SEO.",
         "Add robots.txt file.",
         "Change equal icon color to a brighter yellow."
+    ],
+    "1.0.7":[
+        "Clear, Example and Lookup buttons redesign."
     ]
 }
