@@ -26,5 +26,8 @@
     ],
     "1.0.7":[
         "Clear, Example and Lookup buttons redesign."
+    ],
+    "1.0.8":[
+        "Fix image preview when paste link in a chat."
     ]
 }
